@@ -1,6 +1,6 @@
 
 Electricity Price Forecasting using Generalized Yule-Walker Method
-This repository contains MATLAB code implementing the Generalized Yule-Walker Method for forecasting electricity prices in the Turkish market. Ba- sically, It is used that the PAR series outperforms with SαS which is the special class of α stable distributions, as an expansion of the well-defined AR series.
+This repository contains MATLAB code implementing the Generalized Yule-Walker Method for forecasting electricity prices in the Turkish market. Basically, It is used that the PAR series outperforms with SαS which is the special class of α stable distributions, as an expansion of the well-defined AR series.
 
 Main Steps:
 
