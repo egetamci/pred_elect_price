@@ -1,4 +1,4 @@
-function Y_N=APP_noise(p11,aa1,YY1,N11,p_r11)
+function Y_N=Noise_extraction(p11,aa1,YY1,N11,p_r11)
 k_pp=1;
 if -p11+1+p_r11*k_pp>=p11+1
 k_pp=k_pp;
