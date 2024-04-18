@@ -56,7 +56,7 @@ num_periods = 1;
 aa_matrix = -ones(num_periods+1, forecast_horizon);
 coefficients = ForecastCoeffs(num_periods, adjusted_data_copy, initial_hours, forecast_horizon);
 aa_matrix(2:end, :) = coefficients';
-noise = APP_noise(num_periods, aa_matrix, adjusted_data_copy, initial_hours, forecast_horizon);
+noise = Noise_extraction(num_periods, aa_matrix, adjusted_data_copy, initial_hours, forecast_horizon);
 
 % Perform iterations for noise generation and prediction construction
 auto_period_noise = Covariance(noise, 100);
