@@ -52,7 +52,7 @@ adjusted_data_copy = adjusted_data_periodic;
 period_copy = period_average;
 
 % Perform Akaike Information Criterion (AIC) calculation
-num_periods = 1;
+[Aic_qp1, num_periods] = Akai_Inf_Cri(forecast_horizon, adjusted_data, initial_hours);
 aa_matrix = -ones(num_periods+1, forecast_horizon);
 coefficients = ForecastCoeffs(num_periods, adjusted_data_copy, initial_hours, forecast_horizon);
 aa_matrix(2:end, :) = coefficients';
