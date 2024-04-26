@@ -73,8 +73,10 @@ sine_cosine_data = Sinusoidal(initial_window, initial_window_length, forecast_ho
 adjusted_data = initial_window - sine_cosine_data';
 ```
 
-Then to estimate the period  by a meaure which is used for independence is  function of the stationary process  $X_t$ for lag $k$ is defined as the covariation of random variables $X_{t}$ and $X_{t-k}$ , which is $CV(X_t, X_{t-k})$ .
+Then to estimate the period  by a meaure which is used for independence is  function of the stationary process  $X_t$ for lag $k$ is defined as the covariation of random variables $X_{t}$ and $X_{t-k}$ , which is $CV(X_t, X_{t-k})$.
+
 Estimation is defined over normalized autocovariation function . Namely, it is propose to estimate the value:
+
 The normalized autocovariation for process $X_{t}$ for lag $k$ is given by:
 
 $$
@@ -85,8 +87,9 @@ Where $NCV(X_t,X_{t-k})=\frac{CV(X_t , X_{t-k})}{{\sigma}^{\alpha}{X{t-k}}}$ and
 Estimator of the NCV for a single trajectory a sample   being a realization of a stationary process  takes the form:
 
 $$
-\hat{NCV}(X_t,X_{t-k})=\frac{\sum ^r_{t=l} x_t \text{ sign}(X_{t-k})}{\sum ^ N_{t=l}\|x_t\| }
+\hat{NCV}(X_t, X_{t-k})=\frac{ {\sum}^r_{t=l} x_t\text{sign}(X_{t-k})}{{\sum}^N_{t=l}\|x_t\|}
 $$
+
 $$
 l= \max(1, 1 + k)
 $$
@@ -121,7 +124,7 @@ where $Y_{n}$ is the zero mean series.
 
 * Calculate auto-period and period averages.
 ```
-  auto_period = Covariance(adjusted_data, 100);
+auto_period = Covariance(adjusted_data, 100);
 
  for i = 1:forecast_horizon
 
@@ -148,9 +151,7 @@ where $Y_{n}$ is the zero mean series.
 Then, given AR model can be represented by considering $Y_{n}$ variable as follows:
 
 $$
-\[
-[Y_{nT+v} - \sum^{p}_{i=1}] \phi_i(nT+v) Y_{nT+v-i} = \xi_{nT+v}
-\]
+Y_{nT+v} - \sum_{i=1}^{p} \phi_i(nT+v) Y_{nT+v-i} = \xi_{nT+v}
 $$
 
 **Evaluating the Order (p) of the Model by Akaike Information Criterion (AIC):**
@@ -160,8 +161,9 @@ Another necessary issue is fitting the data to the model efficiency. To find out
 * Perform Akaike Information Criterion (AIC) calculation to determine the optimal model order.
 
 $$
-AIC(p) = -2\sum^{NT}_{i=1}\log(p_{S_{\alpha,\sigma,\beta,\mu}}(\xi_i)) + 2T(p+1).
+AIC(p) = -2 \sum_{i=1 }^{NT} \log(p_{S_{\alpha,\sigma,\beta,\mu}}(\xi_i)) + 2T(p+1).
 $$
+
 
 
 Here $p_{S_{\alpha,\sigma,\beta,\mu}}$ is the density function of the stable distribution. The smallest value of the AIC(p) function gives the most appropriate order for the model. The most optimal order is given for the smallest value of AIC(p).
@@ -228,12 +230,6 @@ $$
 $$
 
 Here, the definition of the measures depends on the type of the data. Estimation of the autocovariance function is remodeled according to period. Besides, the estimator of auto variation is evaluated as follows wherever $v = 1, . . . , T.$ 
-
-
-$$
-\hat{\lambda}_v(k) = \frac{\sum_{n=l}^{r} x_{nT+v} \operatorname{sign}(x_{nT+v-k})}{\sum_{n=l}^{r} x_{nT+v-k}}
-$$
-
 
 Finally, necessary parameters within the $\alpha$-stable AR model  can be calculated via $\hat{\Phi}^{-1}=\hat{\Lambda}^{-1}_v\hat{\lambda}^{-1}_v$ for the construction of the Model (1).
 
