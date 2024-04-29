@@ -314,6 +314,9 @@ legend('Original Data', 'Predicted Values', 'Location', 'northwest');
 
 2 ] T. M. G. J. Kruczek P, Wylomanska A, “The modified yulewalker method for a-stable time series models,” Physica A:Stat Mech Appl, vol. 469, p. 588–603, 2017.
 
+![AIC](https://github.com/egetamci/pred_elect_price/assets/160476027/66c76378-3cca-4640-a1f2-6b7c99ba64e3)
+
+
 
 
 
