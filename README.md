@@ -28,11 +28,11 @@ Here,  $\Phi_i(t) \in \mathbb{R}, ~i = 1, \ldots, p,$  are periodic in  with the
 
 clear all;
 
-opts = detectImportOptions('/Users/egetamci/Downloads/ptf-smf.csv')
+opts = detectImportOptions('/Users/egetamci/Downloads/prices.csv')
 
 opts.VariableNamingRule = 'preserve';
 
-data_table = readtable('/Users/egetamci/Downloads/ptf-smf', opts);
+data_table = readtable('/Users/egetamci/Downloads/prices', opts);
 ```
 
 *   Clean and preprocess the data.
@@ -98,11 +98,10 @@ r= \min(N, N + k).
 $$
 ```
 auto_period = Covariance(adjusted_data, 100);
-
-![auto_codiff](https://github.com/egetamci/pred_elect_price/assets/160476027/18408447-d650-4cf4-8158-6d7aa55c7099)
-
 ```
-Based on the graphic provided above evaluated by Covariance function, 24 hours is estimated as the period $T$.
+
+
+Based on the graphic provided above evaluated by Covariance function, 24 hours is estimated as the period $T.$
 
 Then, the periodic mean $\mu(v)$  is estimated by the period  $T$  :
 
@@ -246,8 +245,6 @@ coefficients = ForecastCoeffs(num_periods, adjusted_data_copy,initial_hours,fore
 aa_matrix(2:end, :) = coefficients';
 ```
 To ensure that the residuals are independent, a graphical test based on empirical autocovariation is suggested
-
-![eleco_codifference_07](https://github.com/egetamci/pred_elect_price/assets/160476027/62fe201b-0074-4b17-bbb3-026ce9bd7342)
 
 
 ```
