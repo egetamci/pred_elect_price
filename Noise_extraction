@@ -1,23 +1,60 @@
-function Y_N=Noise_extraction(p11,aa1,YY1,N11,p_r11)
-k_pp=1;
-if -p11+1+p_r11*k_pp>=p11+1
-k_pp=k_pp;
-else k_pp=k_pp+1;
-end
-peri=p11+1;
-for i5=1:p_r11*N11-p11
-if peri==p_r11+1 peri=1;
-end
-for j3=1:p11+1
-Q_Mat(i5,i5+j3-1)=-aa1(p11+1-j3+1,peri);
-end
-peri=peri+1;
-end
-Q_Mat1(:,:)=Q_Mat(:,p11+1:end);
-NoiSe1(p11+1:p_r11*N11,1)=Q_Mat1*YY1(p11+1:p_r11*N11,1);
-for i2=1:p11
-aa_f1=flip(aa1(2:p11+1,i2));
-NoiSe1(i2,1)=-dot(YY1(k_pp*p_r11-p11+i2:k_pp*p_r11-1+i2),aa_f1)+YY1(i2,1);
-end
-Y_N=NoiSe1;
+function Noise = Noise_extraction(order, coefficients, signal, lengthData, repetitions)
+% Noise_extraction - Extracts noise from a signal using a predictive model.
+%   This function extracts noise from a signal using a predictive model
+%   based on autoregressive (AR) coefficients.
+%
+%   Inputs:
+%     - order: Order of the autoregressive model
+%     - coefficients: Matrix of autoregressive coefficients
+%     - signal: Input signal
+%     - lengthData: Length of the input data
+%     - repetitions: Number of repetitions
+%
+%   Output:
+%     - Noise: Extracted noise
+
+    % Initialize variables
+    numPeriods = order + 1;
+    % Initialize noise vector
+    Noise = zeros(repetitions * lengthData, 1);
+    
+    % Iterate through each repetition
+    for rep = 1:repetitions
+        % Adjust repetition index
+        repetitionIndex = 1;
+        if -order + 1 + repetitions * repetitionIndex >= order + 1
+            repetitionIndex = repetitionIndex;
+        else
+            repetitionIndex = repetitionIndex + 1;
+        end
+        
+        % Initialize period index
+        periodIndex = order + 1;
+        
+        % Construct noise vector for current repetition
+        for i = 1:repetitions * lengthData - order
+            if periodIndex == repetitions + 1
+                periodIndex = 1;
+            end
+            for j = 1:order + 1
+                % Populate Q matrix with coefficients
+                Q_Matrix(i, i + j - 1) = -coefficients(order + 1 - j + 1, periodIndex);
+            end
+            periodIndex = periodIndex + 1;
+        end
+        
+        % Slice Q matrix to appropriate size
+        Q_Matrix1 = Q_Matrix(:, order + 1:end);
+        
+        % Calculate noise for current repetition
+        Noise(order + 1:repetitions * lengthData, 1) = Q_Matrix1 * signal(order + 1:repetitions * lengthData, 1);
+        
+        % Calculate noise for initial periods
+        for j = 1:order
+            % Flip coefficients for current period
+            flippedCoefficients = flip(coefficients(2:order + 1, j));
+            % Calculate noise using dot product
+            Noise(j, 1) = -dot(signal(repetitionIndex * repetitions - order + j:repetitionIndex * repetitions - 1 + j), flippedCoefficients) + signal(j, 1);
+        end
+    end
 end
