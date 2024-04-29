@@ -2,9 +2,9 @@
 clear all;
 
 % Load the CSV file containing price data
-opts = detectImportOptions('/Users/egetamci/Downloads/ptf-smf.csv');
+opts = detectImportOptions('/Users/egetamci/Downloads/prices.csv');
 opts.VariableNamingRule = 'preserve';
-data_table = readtable('/Users/egetamci/Downloads/ptf-smf', opts);
+data_table = readtable('/Users/egetamci/Downloads/prices', opts);
 
 % Extract and clean price data
 prices = data_table.PTF;
