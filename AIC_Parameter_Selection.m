@@ -70,15 +70,30 @@ function coefficients = Calculate_Coefficients(pp, data, data_length, parameters
     end
 end
 
-function covariance = Compute_Covariance(ss, pp, X, N, T)
+function covariance_matrix = Compute_Covariance(lag_index, lag_count, signal_data, data_length, parameter_count)
+% Compute_Covariance - Computes the covariance matrix for a given signal.
+%   This function computes the covariance matrix for a given signal up to a
+%   specified lag count.
+%
+%   Inputs:
+%     - lag_index: Index of the lag to compute covariance for
+%     - lag_count: Total number of lags for covariance computation
+%     - signal_data: Input signal data
+%     - data_length: Length of the input data
+%     - parameter_count: Number of parameters
+%
+%   Output:
+%     - covariance_matrix: Covariance matrix
+
     % Initialize covariance matrix
-    covariance = zeros(pp, pp);
+    covariance_matrix = zeros(lag_count, lag_count);
     
     % Loop through each element of the covariance matrix
-    for i = 1:pp
-        for j = 1:pp
+    for row = 1:lag_count
+        for col = 1:lag_count
             % Compute each element using Lambda function
-            covariance(i, j) = Lambda(X, T, ss - j, i - j, N);
+            covariance_matrix(row, col) = Lambda(signal_data, data_length, lag_index - col, row - col, parameter_count);
         end
     end
 end
+
