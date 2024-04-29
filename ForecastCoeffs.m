@@ -63,7 +63,7 @@ function RM1 = RM(num_periods_2, adjusted_data_copy_2, initial_hours_2, forecast
 end
 
 
-function lamda = Lamda_M(adjusted_data_copy_2, forecast_horizon_2, v11, k11, initial_hours_2)
+function lamda = Lamda(adjusted_data_copy_2, forecast_horizon_2, v11, k11, initial_hours_2)
 % Lamda_M - Estimate Parameters for α-stable PAR Model
 %   Lamda_M function estimates the parameters for an α-stable PAR model and 
 %   returns the coefficients of the resulting time series.
