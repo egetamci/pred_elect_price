@@ -87,7 +87,7 @@ trend_difference = p(1).*x+p(2);
 % Combine forecast data with trend
 final_data(1:(initial_hours)*forecast_horizon, 1) = adjusted_data_periodic;
 final_data(initial_hours*forecast_horizon+1:prediction_hours*forecast_horizon) = forecast_data;
-predicted_values = forecasting_t1(forecast_horizon, period_copy, sine_cosine_data', initial_hours, prediction_hours, final_data);
+predicted_values = forecasting(forecast_horizon, period_copy, sine_cosine_data', initial_hours, prediction_hours, final_data);
 predicted_values = predicted_values + trend_difference;
 initial_data = detrend_data + trend_difference;
 
