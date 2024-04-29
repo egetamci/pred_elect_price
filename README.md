@@ -98,6 +98,9 @@ r= \min(N, N + k).
 $$
 ```
 auto_period = Covariance(adjusted_data, 100);
+
+![auto_codiff](https://github.com/egetamci/pred_elect_price/assets/160476027/18408447-d650-4cf4-8158-6d7aa55c7099)
+
 ```
 Based on the graphic provided above evaluated by Covariance function, 24 hours is estimated as the period $T$.
 
@@ -163,6 +166,8 @@ Another necessary issue is fitting the data to the model efficiency. To find out
 $$
 AIC(p) = -2 \sum_{i=1 }^{NT} \log(p_{S_{\alpha,\sigma,\beta,\mu}}(\xi_i)) + 2T(p+1).
 $$
+
+![AIC](https://github.com/egetamci/pred_elect_price/assets/160476027/c6fd4ffc-1759-4e8a-b469-008b5f3be9ed)
 
 
 
@@ -242,6 +247,9 @@ aa_matrix(2:end, :) = coefficients';
 ```
 To ensure that the residuals are independent, a graphical test based on empirical autocovariation is suggested
 
+![eleco_codifference_07](https://github.com/egetamci/pred_elect_price/assets/160476027/62fe201b-0074-4b17-bbb3-026ce9bd7342)
+
+
 ```
 noise = Noise_extraction(num_periods, aa_matrix, adjusted_data_copy, initial_hours, forecast_horizon);
 auto_period_noise = Covariance(noise, 100);
@@ -314,7 +322,6 @@ legend('Original Data', 'Predicted Values', 'Location', 'northwest');
 
 2 ] T. M. G. J. Kruczek P, Wylomanska A, “The modified yulewalker method for a-stable time series models,” Physica A:Stat Mech Appl, vol. 469, p. 588–603, 2017.
 
-![AIC](https://github.com/egetamci/pred_elect_price/assets/160476027/66c76378-3cca-4640-a1f2-6b7c99ba64e3)
 
 
 
