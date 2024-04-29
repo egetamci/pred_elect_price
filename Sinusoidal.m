@@ -1,25 +1,53 @@
-function num_fonk = Sinusoidal(array2, l_n2, p_r2)
-% This function computes a sinusoidal signal based on input parameters.
-% Inputs:
-%   - array2: Input array
-%   - l_n2: Length of the array
-%   - p_r2: Period of the sinusoidal signal
-% Output:
-%   - num_fonk1: Sinusoidal signal array
-coeffM = calculate_coeff_sinu(array2, l_n2, p_r2);
-b11 = coeffM(1);
-b22 = coeffM(2);
-for t2 = 1:l_n2
-num_fonk(1, t2) = b11 * cos(2 * pi * t2 / p_r2) + b22 * sin(2 * pi * t2 / p_r2);
+function sinusoidal_signal = Sinusoidal(input_array, array_length, period)
+% Sinusoidal - Computes a sinusoidal signal based on input parameters.
+%   This function computes a sinusoidal signal based on the input array,
+%   its length, and the period of the sinusoidal signal.
+%
+%   Inputs:
+%     - input_array: Input array containing data points
+%     - array_length: Length of the input array
+%     - period: Period of the sinusoidal signal
+%
+%   Output:
+%     - sinusoidal_signal: Array containing the computed sinusoidal signal
+
+    % Calculate coefficients for sinusoidal signal
+    coefficients = calculate_coefficients(input_array, array_length, period);
+    b1 = coefficients(1);
+    b2 = coefficients(2);
+    
+    % Initialize sinusoidal signal array
+    sinusoidal_signal = zeros(1, array_length);
+    
+    % Compute sinusoidal signal for each time point
+    for t = 1:array_length
+        sinusoidal_signal(1, t) = b1 * cos(2 * pi * t / period) + b2 * sin(2 * pi * t / period);
+    end
 end
-end
-function Coef = calculate_coeff_sinu(array1, l_n1, p_r1)
-b11 = 0;
-b22 = 0;
-for tt = 1:l_n1
-b11 = b11 + array1(tt, 1) * cos(2 * pi * tt / p_r1);
-b22 = b22 + array1(tt, 1) * sin(2 * pi * tt / p_r1);
-end
-Coef(1) = b11 * 2 / l_n1;
-Coef(2) = b22 * 2 / l_n1;
+
+function coefficients = calculate_coefficients(input_array, array_length, period)
+% calculate_coefficients - Calculates coefficients for the sinusoidal signal.
+%   This function calculates the coefficients required to generate a sinusoidal
+%   signal from the input array and its period.
+%
+%   Inputs:
+%     - input_array: Input array containing data points
+%     - array_length: Length of the input array
+%     - period: Period of the sinusoidal signal
+%
+%   Output:
+%     - coefficients: Array containing the calculated coefficients
+
+    b1 = 0;
+    b2 = 0;
+    
+    % Compute coefficients for the sinusoidal signal
+    for t = 1:array_length
+        b1 = b1 + input_array(t, 1) * cos(2 * pi * t / period);
+        b2 = b2 + input_array(t, 1) * sin(2 * pi * t / period);
+    end
+    
+    % Normalize coefficients
+    coefficients(1) = b1 * 2 / array_length;
+    coefficients(2) = b2 * 2 / array_length;
 end
